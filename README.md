@@ -1,0 +1,2 @@
+# rust_console_project_template
+コンソールアプリ作成用テンプレート
