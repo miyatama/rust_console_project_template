@@ -9,11 +9,12 @@ cfg_if::cfg_if! {
 */
 use domain::TodoApiClient;
 
-#[cfg(feature = "mock")]
-use mockall::automock;
+// TODO DomainHandlerをautomockしたい。
+// #[cfg(feature = "mock")]
+// use mockall::automock;
 
 // ref: https://docs.rs/mockall/latest/mockall/#associated-types
-#[cfg_attr(feature = "mock", automock)]
+// #[cfg_attr(feature = "mock", automock)]
 pub trait DomainHandler {
     type TodoApi: TodoApiClient;
 

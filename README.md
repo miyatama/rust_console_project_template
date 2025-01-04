@@ -6,6 +6,7 @@
 
 ```shell
 cargo test -p domain --features mock
+cargo test -p domain_handler --features mock
 cargo test -p repository --features mock
 ```
 
@@ -34,8 +35,11 @@ utilモジュール
 classDiagram
 
   usecase <.. ui 
+  domain_handler <.. ui
   repository <.. usecase
+  domain_handler <.. repository
   domain <.. repository
+  domain <.. domain_handler
   util <.. ui
 
   class ui {
@@ -43,6 +47,8 @@ classDiagram
   class usecase {
   }
   class repository {
+  }
+  class domain_handler {
   }
   class domain {
   }

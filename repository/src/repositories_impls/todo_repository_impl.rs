@@ -1,6 +1,6 @@
 use crate::repositories::TodoRepository;
-use domain::{TodoApiClient};
-use domain_handler::{DomainHandler};
+use domain::TodoApiClient;
+use domain_handler::DomainHandler;
 use util::AppResult;
 use util::Todo;
 
@@ -39,6 +39,10 @@ impl<'r, R: DomainHandler> TodoRepository for TodoRepositoryImpl<'r, R> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    use domain::TodoApiClient;
+    use domain_handler::DomainHandlerImpl;
+    use util::Todo;
     #[test]
     fn test_create() {
         let expect_todo = Todo {
@@ -50,13 +54,13 @@ mod tests {
             .expect_create()
             .times(1)
             .return_const(expect_todo);
-        let mock_domain_handler = DomainHandler::new();
+        let mock_domain_handler = DomainHandlerImpl::new();
         mock_domain_handler
             .expect_todo_api_client()
             .times(1)
             .return_const(mock_todo_api_client);
         let repository = TodoRepositoryImpl::new(mock_domain_handler);
         let result = repository.create("test".to_string());
-        assert_eq!(expect, result);
+        assert_eq!(expect_todo, result);
     }
 }
