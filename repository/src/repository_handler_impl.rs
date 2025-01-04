@@ -1,5 +1,5 @@
 use crate::{RepositoryHandler, TodoRepositoryImpl};
-use domain::DomainHandler;
+use domain_handler::DomainHandler;
 
 pub struct RepositoryHandlerImpl<'d, D: DomainHandler> {
     todo_repository: TodoRepositoryImpl<'d, D>,

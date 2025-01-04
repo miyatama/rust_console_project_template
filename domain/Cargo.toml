@@ -15,3 +15,4 @@ log = {version = "0.4.22", features = ["std", "serde"]}
 futures = "0.3.31"
 mockall = {version = "0.13.1", optional = true}
 mockall_double = {version = "0.3.1", optional = true}
+cfg-if = "1.0.0"

@@ -5,6 +5,7 @@
 テストコマンド
 
 ```shell
+cargo test -p domain --features mock
 cargo test -p repository --features mock
 ```
 
@@ -16,6 +17,7 @@ cargo test -p repository --features mock
 | usecase | 各種ビジネスロジック |
 | repository | usecaseへdomainを提供 |
 | domain | アトム的なデータアクセッサ |
+| domain_hanlder | domainの処理群を上位層へ提供 |
 | util | データ定義やログなど |
 
 utilモジュール
@@ -152,3 +154,35 @@ error[E0308]: mismatched types
 ```
 
 mockall用にinjectionをtraitへ変更する
+
+### custom attribute panicked
+
+domainで定義したDomainHandler traitで発生。
+
+```text
+error: custom attribute panicked
+  --> domain\src\domain_handler.rs:16:30
+   |
+16 | #[cfg_attr(feature = "mock", automock)]
+   |                              ^^^^^^^^
+   |
+   = help: message: Default value not given for associated type.  More information may be available when mockall is built with the "nightly" feature.
+```
+
+automockはfeatureを指定してuseしてる
+
+```rust
+#[cfg(not(feature = "mock"))]
+use crate::TodoApiClient;
+
+#[cfg(feature = "mock")]
+use mockall::automock;
+
+#[cfg_attr(feature = "mock", automock)]
+pub trait DomainHandler {
+    type TodoApi: TodoApiClient;
+    fn todo_api_client(&self) -> &Self::TodoApi;
+}
+```
+
+どうもautomockなtraitを保持するautomockなtraitを使ってるのがまずいっぽい。 -> domainをdomain + domain_handlerに分割

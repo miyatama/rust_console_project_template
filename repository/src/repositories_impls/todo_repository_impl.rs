@@ -1,5 +1,6 @@
 use crate::repositories::TodoRepository;
-use domain::{DomainHandler, TodoApiClient};
+use domain::{TodoApiClient};
+use domain_handler::{DomainHandler};
 use util::AppResult;
 use util::Todo;
 

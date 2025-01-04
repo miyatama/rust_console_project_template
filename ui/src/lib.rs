@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand};
-use domain::DomainHandlerImpl;
+use domain_handler::DomainHandlerImpl;
 use log::info;
 use repository::RepositoryHandlerImpl;
 use std::cmp::min;
