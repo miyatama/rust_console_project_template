@@ -2,6 +2,12 @@
 
 コマンドラインアプリのテンプレート。テストの組み込み方法などの実装方法調査で使用。
 
+テストコマンド
+
+```shell
+cargo test -p repository --features mock
+```
+
 ## Layer
 
 | name | description |
