@@ -8,5 +8,4 @@ pub use data::todo::Todo;
 
 pub use error::Error;
 
-use anyhow::Result;
-pub type AppResult<T> = Result<T, Error>;
+pub type AppResult<T> = anyhow::Result<T, Error>;

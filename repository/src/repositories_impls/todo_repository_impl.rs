@@ -48,12 +48,12 @@ mod tests {
             id: 100,
             text: "test2".to_string(),
         };
-        let mock_result = anyhow::Ok(expect_todo);
-        let mock_todo_api_client = MockTodoApiClient::new();
+        let mock_result = Ok(expect_todo.clone());
+        let mut mock_todo_api_client = MockTodoApiClient::new();
         mock_todo_api_client
             .expect_create()
             .times(1)
-            .return_const_st(mock_result);
+            .return_once_st(move |_| mock_result);
         let repository = TodoRepositoryImpl::new(&mock_todo_api_client);
         let result = repository.create("test".to_string());
         assert_eq!(expect_todo, result.unwrap());
