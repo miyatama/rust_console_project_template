@@ -17,6 +17,7 @@ cargo test -p repository --features mock
 | ui | ユーザーへのインタラクション等を提供 |
 | usecase | 各種ビジネスロジック |
 | repository | usecaseへdomainを提供 |
+| repository_handler | repositoryの処理群を上位層へ提供 |
 | domain | アトム的なデータアクセッサ |
 | domain_hanlder | domainの処理群を上位層へ提供 |
 | util | データ定義やログなど |
@@ -36,7 +37,9 @@ classDiagram
 
   usecase <.. ui 
   domain_handler <.. ui
-  repository <.. usecase
+  repository_handler <.. ui
+  repository <.. repository_handler
+  repository_handler <.. usecase
   domain_handler <.. repository
   domain <.. repository
   domain <.. domain_handler
@@ -45,6 +48,8 @@ classDiagram
   class ui {
   }
   class usecase {
+  }
+  class repository_handler {
   }
   class repository {
   }
@@ -65,6 +70,7 @@ classDiagram
 + [Rust の Future について](https://blog.tiqwab.com/2022/03/26/rust-future.html)
 + [[Rust] フィーチャーフラグの使い方](https://qiita.com/osanshouo/items/43271813b5d62e89d598)
 + [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
++ [RustによるResult型のエラーハンドリング入門](https://zenn.dev/hakoten/articles/8ae9dd0d3a2080)
 
 ## will
 

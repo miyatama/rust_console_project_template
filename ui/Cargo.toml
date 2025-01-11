@@ -11,6 +11,7 @@ mock = ["mockall", "mockall_double"]
 util = {path = "../util"}
 usecase= {path = "../usecase"}
 repository = {path = "../repository"}
+repository_handler = {path = "../repository_handler"}
 domain = {path = "../domain"}
 domain_handler = {path = "../domain_handler"}
 clap = {version = "4.5.23", features = ["derive"] }

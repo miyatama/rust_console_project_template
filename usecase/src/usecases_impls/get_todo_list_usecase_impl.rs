@@ -1,5 +1,6 @@
 use crate::usecases::get_todo_list_usecase::GetTodoListUseCase;
-use repository::{RepositoryHandler, TodoRepository};
+use repository::TodoRepository;
+use repository_handler::RepositoryHandler;
 use util::AppResult;
 use util::Todo;
 

@@ -1,5 +1,6 @@
 use crate::usecases::delete_todo_usecase::DeleteTodoUseCase;
-use repository::{RepositoryHandler, TodoRepository};
+use repository::TodoRepository;
+use repository_handler::RepositoryHandler;
 use util::AppResult;
 
 pub struct DeleteTodoUseCaseImpl<'r, R: RepositoryHandler> {

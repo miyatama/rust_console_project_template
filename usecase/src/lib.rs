@@ -1,7 +1,7 @@
 mod usecases;
 mod usecases_impls;
 
-use repository::RepositoryHandler;
+use repository_handler::RepositoryHandler;
 pub use usecases::add_todo_usecase::AddTodoUseCase;
 pub use usecases::delete_todo_usecase::DeleteTodoUseCase;
 pub use usecases::get_todo_list_usecase::GetTodoListUseCase;

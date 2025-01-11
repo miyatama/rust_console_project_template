@@ -1,22 +1,21 @@
 use crate::repositories::TodoRepository;
 use domain::TodoApiClient;
-use domain_handler::DomainHandler;
 use util::AppResult;
 use util::Todo;
 
-pub struct TodoRepositoryImpl<'r, R: DomainHandler> {
-    todo_api_client: &'r R::TodoApi,
+pub struct TodoRepositoryImpl<'r, T: TodoApiClient> {
+    todo_api_client: &'r T,
 }
 
-impl<'r, R: DomainHandler> TodoRepositoryImpl<'r, R> {
-    pub fn new(handler: &'r R) -> Self {
+impl<'r, T: TodoApiClient> TodoRepositoryImpl<'r, T> {
+    pub fn new(todo_api_client: &'r T) -> Self {
         Self {
-            todo_api_client: handler.todo_api_client(),
+            todo_api_client: todo_api_client,
         }
     }
 }
 
-impl<'r, R: DomainHandler> TodoRepository for TodoRepositoryImpl<'r, R> {
+impl<'r, T: TodoApiClient> TodoRepository for TodoRepositoryImpl<'r, T> {
     fn create(&self, text: String) -> AppResult<Todo> {
         self.todo_api_client.create(Todo { id: 0, text: text })
     }
@@ -40,27 +39,23 @@ impl<'r, R: DomainHandler> TodoRepository for TodoRepositoryImpl<'r, R> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use domain::TodoApiClient;
-    use domain_handler::DomainHandlerImpl;
+    use domain::MockTodoApiClient;
     use util::Todo;
+
     #[test]
     fn test_create() {
         let expect_todo = Todo {
             id: 100,
             text: "test2".to_string(),
         };
-        let mock_todo_api_client = TodoApiClient::new();
+        let mock_result = anyhow::Ok(expect_todo);
+        let mock_todo_api_client = MockTodoApiClient::new();
         mock_todo_api_client
             .expect_create()
             .times(1)
-            .return_const(expect_todo);
-        let mock_domain_handler = DomainHandlerImpl::new();
-        mock_domain_handler
-            .expect_todo_api_client()
-            .times(1)
-            .return_const(mock_todo_api_client);
-        let repository = TodoRepositoryImpl::new(mock_domain_handler);
+            .return_const_st(mock_result);
+        let repository = TodoRepositoryImpl::new(&mock_todo_api_client);
         let result = repository.create("test".to_string());
-        assert_eq!(expect_todo, result);
+        assert_eq!(expect_todo, result.unwrap());
     }
 }

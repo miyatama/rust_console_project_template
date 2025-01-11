@@ -1,0 +1,9 @@
+[package]
+name = "repository_handler"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+util = {path = "../util"}
+repository = {path = "../repository"}
+domain_handler = {path = "../domain_handler"}

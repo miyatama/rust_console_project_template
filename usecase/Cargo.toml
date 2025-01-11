@@ -9,6 +9,7 @@ mock = ["mockall", "mockall_double"]
 [dependencies]
 util = {path = "../util"}
 repository = {path = "../repository"}
+repository_handler = {path = "../repository_handler"}
 mockall = {version = "0.13.1", optional = true}
 mockall_double = {version = "0.3.1", optional = true}
 

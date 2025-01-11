@@ -1,7 +1,7 @@
 use util::AppResult;
 
 //TODO Usecaseのテスト組み込み
-/* 
+/*
 #[cfg(test)]
 use mockall::automock;
 

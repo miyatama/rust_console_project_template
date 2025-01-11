@@ -7,5 +7,9 @@ members = [
     "repository",
     "domain_handler",
     "domain",
-    "util",
+    "util", "repository_handler",
 ]
+
+[workspace.dependencies]
+anyhow = "1.0.95"
+thiserror = "2.0.11"

@@ -5,6 +5,7 @@ use reqwest;
 use reqwest::header::CONTENT_TYPE;
 use serde::{Deserialize, Serialize};
 use util::AppResult;
+use util::Error::TodoApiError;
 use util::Todo;
 
 pub struct TodoApiClientImpl {}
@@ -55,8 +56,22 @@ impl TodoApiClient for TodoApiClientImpl {
                 .header(CONTENT_TYPE, "application/json")
                 .body(param_string)
                 .send()
-                .await?;
-            let content = res.text().await?;
+                .await;
+            match res {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let res = res.unwrap();
+            let content = res.text().await;
+            match content {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let content = content.unwrap();
             debug!("get todo response: {}", &content);
             let response: GetTodoResponse = serde_json::from_str(&content).unwrap();
             Ok(response.todos)
@@ -75,8 +90,22 @@ impl TodoApiClient for TodoApiClientImpl {
                 .header(CONTENT_TYPE, "application/json")
                 .body(param_string)
                 .send()
-                .await?;
-            let content = res.text().await?;
+                .await;
+            match res {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let res = res.unwrap();
+            let content = res.text().await;
+            match content {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let content = content.unwrap();
             debug!("create todo response: {}", &content);
             let response: Todo = serde_json::from_str(&content).unwrap();
             Ok(response)
@@ -98,8 +127,22 @@ impl TodoApiClient for TodoApiClientImpl {
                 .header(CONTENT_TYPE, "application/json")
                 .body(param_string)
                 .send()
-                .await?;
-            let content = res.text().await?;
+                .await;
+            match res {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let res = res.unwrap();
+            let content = res.text().await;
+            match content {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let content = content.unwrap();
             debug!("update todo response: {}", &content);
             let response: Todo = serde_json::from_str(&content).unwrap();
             Ok(response)
@@ -113,12 +156,19 @@ impl TodoApiClient for TodoApiClientImpl {
             let url = "http://localhost:8080/todo";
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
-            let _res = client
+            let res = client
                 .delete(url)
                 .header(CONTENT_TYPE, "application/json")
                 .body(param_string)
                 .send()
-                .await?;
+                .await;
+            match res {
+                Err(e) => {
+                    return Err(TodoApiError(format!("{:?}", e)));
+                }
+                _ => {}
+            }
+            let _res = res.unwrap();
             Ok(())
         };
         executor::block_on(future)
