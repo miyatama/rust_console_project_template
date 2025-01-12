@@ -36,13 +36,13 @@ utilモジュール
 ---
 classDiagram
 
-  usecase <.. ui 
+  usecase_handler <.. ui 
   domain_handler <.. ui
   repository_handler <.. ui
-  repository <.. repository_handler
+  usecase <.. usecase_handler
   repository_handler <.. usecase
+  repository <.. repository_handler
   domain_handler <.. repository
-  domain <.. repository
   domain <.. domain_handler
   util <.. ui
 
@@ -83,13 +83,13 @@ classDiagram
 + [x] async -> Futureとしたが、Futureを内部に閉じ込めてIFはシンプルにAppResultとする
 + [x] 各層のimplはtraitを参照させる。直接implを参照させない。
   + traitを参照させようとしたら実態が見れないと怒られたので実装参照で実施
-+ [ ] テスト組み込み
++ [x] テスト組み込み
 + [ ] setting機能追加
 + [ ] log -> tracing
 + [ ] ファイル管理とかのサンプル追加
 + [ ] 制御ファイル(yaml)の追加
 + [ ] 起動パラメタでのdry-runしたい
-+ [ ]Qiitaに記事を出す
++ [ ] Qiitaに記事を出す
   + base
     + struct only injection using async
   + test
