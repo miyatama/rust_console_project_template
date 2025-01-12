@@ -58,4 +58,60 @@ mod tests {
         let result = repository.create("test".to_string());
         assert_eq!(expect_todo, result.unwrap());
     }
+
+    #[test]
+    fn test_update() {
+        let expect_todo = Todo {
+            id: 100,
+            text: "test2".to_string(),
+        };
+        let mock_result = Ok(expect_todo.clone());
+        let mut mock_todo_api_client = MockTodoApiClient::new();
+        mock_todo_api_client
+            .expect_update()
+            .times(1)
+            .return_once_st(move |_| mock_result);
+        let repository = TodoRepositoryImpl::new(&mock_todo_api_client);
+        let result = repository.update(Todo {
+            id: 1000,
+            text: "test".to_string(),
+        });
+        assert_eq!(expect_todo, result.unwrap());
+    }
+
+    #[test]
+    fn test_list() {
+        let expect_todo = vec![
+            Todo {
+                id: 100,
+                text: "test2".to_string(),
+            },
+            Todo {
+                id: 101,
+                text: "test3".to_string(),
+            },
+        ];
+        let mock_result = Ok(expect_todo.clone());
+        let mut mock_todo_api_client = MockTodoApiClient::new();
+        mock_todo_api_client
+            .expect_list()
+            .times(1)
+            .return_once_st(move || mock_result);
+        let repository = TodoRepositoryImpl::new(&mock_todo_api_client);
+        let result = repository.list();
+        assert_eq!(expect_todo, result.unwrap());
+    }
+
+    #[test]
+    fn test_delete() {
+        let mock_result = Ok(());
+        let mut mock_todo_api_client = MockTodoApiClient::new();
+        mock_todo_api_client
+            .expect_delete()
+            .times(1)
+            .return_once_st(move |_| mock_result);
+        let repository = TodoRepositoryImpl::new(&mock_todo_api_client);
+        let result = repository.delete(101);
+        assert_eq!(true, result.is_ok());
+    }
 }
