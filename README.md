@@ -72,6 +72,7 @@ classDiagram
 + [[Rust] フィーチャーフラグの使い方](https://qiita.com/osanshouo/items/43271813b5d62e89d598)
 + [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 + [RustによるResult型のエラーハンドリング入門](https://zenn.dev/hakoten/articles/8ae9dd0d3a2080)
++ [【Rust】モックライブラリMockitoで非同期のテストコードを書く](https://zenn.dev/collabostyle/articles/c44cc1d20ad4fb)
 
 ## will
 
@@ -89,6 +90,7 @@ classDiagram
 + [ ] ファイル管理とかのサンプル追加
 + [ ] 制御ファイル(yaml)の追加
 + [ ] 起動パラメタでのdry-runしたい
++ [ ] domain層のテスト追加(mockito利用)
 + [ ] Qiitaに記事を出す
   + base
     + struct only injection using async
