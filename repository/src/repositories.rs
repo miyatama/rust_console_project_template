@@ -1,7 +1,5 @@
 mod todo_repository;
 
-// #[cfg(feature = "mock")]
-// use mockall_double::double;
-
-// #[cfg_attr(feature = "mock", double)]
+#[cfg(feature = "mock")]
+pub use todo_repository::MockTodoRepository;
 pub use todo_repository::TodoRepository;

@@ -39,7 +39,7 @@ impl<'r, T: TodoApiClient> TodoRepository for TodoRepositoryImpl<'r, T> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use domain::MockTodoApiClient;
+    use domain::MockTodoApiClient as TodoApiClient;
     use util::Todo;
 
     #[test]
@@ -49,7 +49,7 @@ mod tests {
             text: "test2".to_string(),
         };
         let mock_result = Ok(expect_todo.clone());
-        let mut mock_todo_api_client = MockTodoApiClient::new();
+        let mut mock_todo_api_client = TodoApiClient::new();
         mock_todo_api_client
             .expect_create()
             .times(1)
@@ -66,7 +66,7 @@ mod tests {
             text: "test2".to_string(),
         };
         let mock_result = Ok(expect_todo.clone());
-        let mut mock_todo_api_client = MockTodoApiClient::new();
+        let mut mock_todo_api_client = TodoApiClient::new();
         mock_todo_api_client
             .expect_update()
             .times(1)
@@ -92,7 +92,7 @@ mod tests {
             },
         ];
         let mock_result = Ok(expect_todo.clone());
-        let mut mock_todo_api_client = MockTodoApiClient::new();
+        let mut mock_todo_api_client = TodoApiClient::new();
         mock_todo_api_client
             .expect_list()
             .times(1)
@@ -105,7 +105,7 @@ mod tests {
     #[test]
     fn test_delete() {
         let mock_result = Ok(());
-        let mut mock_todo_api_client = MockTodoApiClient::new();
+        let mut mock_todo_api_client = TodoApiClient::new();
         mock_todo_api_client
             .expect_delete()
             .times(1)

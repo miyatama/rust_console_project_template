@@ -6,8 +6,8 @@
 
 ```shell
 cargo test -p domain --features mock
-cargo test -p domain_handler --features mock
 cargo test -p repository --features mock
+cargo test -p usecase --features mock
 ```
 
 ## Layer

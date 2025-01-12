@@ -1,21 +1,20 @@
 use crate::usecases::delete_todo_usecase::DeleteTodoUseCase;
 use repository::TodoRepository;
-use repository_handler::RepositoryHandler;
 use util::AppResult;
 
-pub struct DeleteTodoUseCaseImpl<'r, R: RepositoryHandler> {
-    todo_repository: &'r R::Todo,
+pub struct DeleteTodoUseCaseImpl<'r, R: TodoRepository> {
+    todo_repository: &'r R,
 }
 
-impl<'r, R: RepositoryHandler> DeleteTodoUseCaseImpl<'r, R> {
-    pub fn new(handler: &'r R) -> Self {
+impl<'r, R: TodoRepository> DeleteTodoUseCaseImpl<'r, R> {
+    pub fn new(todo_repository: &'r R) -> Self {
         Self {
-            todo_repository: handler.todo_repository(),
+            todo_repository: todo_repository,
         }
     }
 }
 
-impl<'r, R: RepositoryHandler> DeleteTodoUseCase for DeleteTodoUseCaseImpl<'r, R> {
+impl<'r, R: TodoRepository> DeleteTodoUseCase for DeleteTodoUseCaseImpl<'r, R> {
     fn run(&self, id: u32) -> AppResult<()> {
         self.todo_repository.delete(id)
     }
