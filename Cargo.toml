@@ -7,7 +7,7 @@ members = [
     "repository",
     "domain_handler",
     "domain",
-    "util", "repository_handler",
+    "util", "repository_handler", "usecase_handler",
 ]
 
 [workspace.dependencies]

@@ -16,6 +16,7 @@ cargo test -p repository --features mock
 | :----- | :----- |
 | ui | ユーザーへのインタラクション等を提供 |
 | usecase | 各種ビジネスロジック |
+| usecase_handleer | 各種ビジネスロジックの処理群を上位層へ提供 |
 | repository | usecaseへdomainを提供 |
 | repository_handler | repositoryの処理群を上位層へ提供 |
 | domain | アトム的なデータアクセッサ |

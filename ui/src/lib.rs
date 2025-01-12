@@ -3,10 +3,8 @@ use domain_handler::DomainHandlerImpl;
 use log::info;
 use repository_handler::RepositoryHandlerImpl;
 use std::cmp::min;
-use usecase::{
-    AddTodoUseCase, DeleteTodoUseCase, GetTodoListUseCase, UpdateTodoUseCase, UseCases,
-    UseCasesImpls,
-};
+use usecase::{AddTodoUseCase, DeleteTodoUseCase, GetTodoListUseCase, UpdateTodoUseCase};
+use usecase_handler::{UsecaseHandler, UsecaseHandlerImpl};
 use util::AppResult;
 
 #[derive(Debug, Parser)]
@@ -44,7 +42,7 @@ pub async fn run(config: &Config) -> AppResult<()> {
 
     let domain_hanler = DomainHandlerImpl::new();
     let repository_handler = RepositoryHandlerImpl::new(&domain_hanler);
-    let usecases = UseCasesImpls::new(&repository_handler).await;
+    let usecases = UsecaseHandlerImpl::new(&repository_handler).await;
     match &config.subcommand {
         SubCommands::List { number } => {
             let usecase = usecases.get_todo_list();

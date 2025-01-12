@@ -9,7 +9,8 @@ mock = ["mockall", "mockall_double"]
 
 [dependencies]
 util = {path = "../util"}
-usecase= {path = "../usecase"}
+usecase = {path = "../usecase"}
+usecase_handler = {path = "../usecase_handler"}
 repository = {path = "../repository"}
 repository_handler = {path = "../repository_handler"}
 domain = {path = "../domain"}
