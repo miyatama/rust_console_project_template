@@ -41,6 +41,13 @@ pub async fn run(config: &Config) -> AppResult<()> {
     info!("config: {:?}", config);
 
     let domain_hanler = DomainHandlerImpl::new();
+    match domain_hanler {
+        Err(e) => {
+            return Err(e);
+        }
+        _ => {}
+    }
+    let domain_hanler = domain_hanler.unwrap();
     let repository_handler = RepositoryHandlerImpl::new(&domain_hanler);
     let usecases = UsecaseHandlerImpl::new(&repository_handler).await;
     match &config.subcommand {

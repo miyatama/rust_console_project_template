@@ -1,4 +1,4 @@
-todo_service:
+todo_service_setting:
   host: "localhost:8080"
   api_root: ""
   protocol: "http"

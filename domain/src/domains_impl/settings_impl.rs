@@ -2,8 +2,8 @@ use crate::domains::settings::Settings;
 use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::Read;
-use util::Error::SettingInitializeError;
 use util::AppResult;
+use util::Error::SettingInitializeError;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct SettingValue {
@@ -41,9 +41,7 @@ impl SettingsImpl {
         }
         let settings = serde_yml::from_str(&yaml);
         match settings {
-            Err(e) => {
-                Err(SettingInitializeError(format!("{:?}", e)))
-            }
+            Err(e) => Err(SettingInitializeError(format!("{:?}", e))),
             Ok(settings) => {
                 let settings: SettingValue = settings;
                 Ok(Self {
