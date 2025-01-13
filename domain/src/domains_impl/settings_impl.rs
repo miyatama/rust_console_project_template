@@ -1,6 +1,16 @@
 use crate::domains::settings::Settings;
+use serde::{Deserialize, Serialize};
+use std::fs::File;
+use std::io::Read;
+use util::Error::SettingInitializeError;
 use util::AppResult;
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct SettingValue {
+    pub todo_service_setting: TodoServiceSetting,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct TodoServiceSetting {
     pub host: String,
     pub api_root: String,
@@ -12,14 +22,34 @@ pub struct SettingsImpl {
 }
 
 impl SettingsImpl {
-    pub fn new() -> Self {
-        // TODO yaml読み込み
-        Self {
-            todo_service_setting: TodoServiceSetting {
-                host: "localhost:8080".to_string(),
-                api_root: "/api".to_string(),
-                protocol: "http".to_string(),
-            },
+    pub fn new() -> AppResult<Self> {
+        let setting_filename = "settings.yaml";
+        let file = File::open(setting_filename);
+        match file {
+            Err(e) => {
+                return Err(SettingInitializeError(format!("{:?}", e)));
+            }
+            _ => {}
+        }
+        let mut f = file.unwrap();
+        let mut yaml = String::new();
+        match f.read_to_string(&mut yaml) {
+            Err(e) => {
+                return Err(SettingInitializeError(format!("{:?}", e)));
+            }
+            _ => {}
+        }
+        let settings = serde_yml::from_str(&yaml);
+        match settings {
+            Err(e) => {
+                Err(SettingInitializeError(format!("{:?}", e)))
+            }
+            Ok(settings) => {
+                let settings: SettingValue = settings;
+                Ok(Self {
+                    todo_service_setting: settings.todo_service_setting.clone(),
+                })
+            }
         }
     }
 }
