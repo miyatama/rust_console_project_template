@@ -20,3 +20,27 @@ impl<'r, R: TodoRepository> UpdateTodoUseCase for UpdateTodoUseCaseImpl<'r, R> {
         self.todo_repository.update(Todo { id: id, text: text })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use repository::MockTodoRepository as TodoRepository;
+
+    #[tokio::test]
+    async fn update_todo_usecase_success() {
+        let expect = Todo {
+            id: 1,
+            text: "test01".to_string(),
+        };
+        let mock_result = Ok(expect.clone());
+        let mut mock_todo_repository = TodoRepository::new();
+        mock_todo_repository
+            .expect_update()
+            .times(1)
+            .return_once_st(move |_| mock_result);
+        let usecase = UpdateTodoUseCaseImpl::new(&mock_todo_repository);
+        let result = usecase.run(100u32, "test_param".to_string());
+        assert_eq!(result.is_ok(), true);
+        assert_eq!(result.unwrap(), expect);
+    }
+}

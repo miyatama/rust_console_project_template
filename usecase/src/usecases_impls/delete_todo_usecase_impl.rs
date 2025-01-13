@@ -19,3 +19,22 @@ impl<'r, R: TodoRepository> DeleteTodoUseCase for DeleteTodoUseCaseImpl<'r, R> {
         self.todo_repository.delete(id)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use repository::MockTodoRepository as TodoRepository;
+
+    #[tokio::test]
+    async fn delete_todo_usecase_success() {
+        let mock_result = Ok(());
+        let mut mock_todo_repository = TodoRepository::new();
+        mock_todo_repository
+            .expect_delete()
+            .times(1)
+            .return_once_st(move |_| mock_result);
+        let usecase = DeleteTodoUseCaseImpl::new(&mock_todo_repository);
+        let result = usecase.run(101u32);
+        assert_eq!(result.is_ok(), true);
+    }
+}
