@@ -60,6 +60,10 @@ classDiagram
   }
 ```
 
+## Settings
+
+TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
+
 ## reference
 
 + [RustのClapクレートがメチャクチャ良かった話](https://zenn.dev/shinobuy/articles/53aed032fe5977)
