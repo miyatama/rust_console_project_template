@@ -23,8 +23,8 @@ impl DomainHandlerImpl {
     pub fn new() -> AppResult<Self> {
         let settings = SettingsImpl::new().unwrap();
         Ok(Self {
-            settings: settings,
-            todo_api_client: TodoApiClientImpl::new(),
+            settings: settings.clone(),
+            todo_api_client: TodoApiClientImpl::new(settings),
         })
     }
 }

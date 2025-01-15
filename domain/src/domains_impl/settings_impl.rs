@@ -17,6 +17,7 @@ pub struct TodoServiceSetting {
     pub protocol: String,
 }
 
+#[derive(Clone)]
 pub struct SettingsImpl {
     pub todo_service_setting: TodoServiceSetting,
 }

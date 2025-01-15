@@ -1,4 +1,6 @@
+use crate::domains::settings::Settings;
 use crate::domains::todo_api_client::TodoApiClient;
+use crate::domains_impl::settings_impl::SettingsImpl;
 use futures::executor;
 use log::debug;
 use reqwest;
@@ -8,11 +10,13 @@ use util::AppResult;
 use util::Error::TodoApiError;
 use util::Todo;
 
-pub struct TodoApiClientImpl {}
+pub struct TodoApiClientImpl {
+    settings: SettingsImpl,
+}
 
 impl TodoApiClientImpl {
-    pub fn new() -> Self {
-        Self {}
+    pub fn new(settings: SettingsImpl) -> Self {
+        Self { settings: settings }
     }
 }
 
@@ -48,7 +52,9 @@ impl TodoApiClient for TodoApiClientImpl {
             let param = GetTodoParam {
                 text: "".to_string(),
             };
-            let url = "http://localhost:8080/todos";
+            let endpoint = self.settings.get_todo_endpoint().unwrap();
+            let url = format!("{}/todos", endpoint);
+            debug!("get todos url: {}", &url);
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
             let res = client
@@ -82,7 +88,8 @@ impl TodoApiClient for TodoApiClientImpl {
     fn create(&self, todo: Todo) -> AppResult<Todo> {
         let future = async move {
             let param = AddTodoParam { text: todo.text };
-            let url = "http://localhost:8080/todo";
+            let endpoint = self.settings.get_todo_endpoint().unwrap();
+            let url = format!("{}/todo", endpoint);
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
             let res = client
@@ -119,7 +126,8 @@ impl TodoApiClient for TodoApiClientImpl {
                 id: todo.id,
                 text: todo.text,
             };
-            let url = "http://localhost:8080/todo";
+            let endpoint = self.settings.get_todo_endpoint().unwrap();
+            let url = format!("{}/todo", endpoint);
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
             let res = client
@@ -153,7 +161,8 @@ impl TodoApiClient for TodoApiClientImpl {
     fn delete(&self, todo: Todo) -> AppResult<()> {
         let future = async move {
             let param = DeleteTodoParam { id: todo.id };
-            let url = "http://localhost:8080/todo";
+            let endpoint = self.settings.get_todo_endpoint().unwrap();
+            let url = format!("{}/todo", endpoint);
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
             let res = client
