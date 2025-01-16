@@ -66,17 +66,25 @@ TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
 
 ## reference
 
-+ [RustのClapクレートがメチャクチャ良かった話](https://zenn.dev/shinobuy/articles/53aed032fe5977)
-+ [Clap の Derive API で列挙型のコマンドラインオプションを実装する](https://zenn.dev/takanori_is/articles/rust-clap-derive-api-arg-enum)
-+ [Rust の新しい HTTP サーバーのクレート Axum をフルに活用してサーバーサイドアプリケーション開発をしてみる](https://blog-dry.com/entry/2021/12/26/002649#Dependency-Injection)
-+ [[Rust] mockallで単体テスト](https://qiita.com/deepgreenAN/items/1b9887db759bbb96c9b6)
-+ [RustのテストのTIPS](https://qiita.com/aoyagikouhei/items/dadafc8d6295db76ef0e#asyncawait%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
-+ [Rust Crate Warning About Workspace Resolver - What is it, how to fix it?](https://forum.dfinity.org/t/rust-crate-warning-about-workspace-resolver-what-is-it-how-to-fix-it/23883)
-+ [Rust の Future について](https://blog.tiqwab.com/2022/03/26/rust-future.html)
-+ [[Rust] フィーチャーフラグの使い方](https://qiita.com/osanshouo/items/43271813b5d62e89d598)
-+ [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
-+ [RustによるResult型のエラーハンドリング入門](https://zenn.dev/hakoten/articles/8ae9dd0d3a2080)
++ 引数
+  + [RustのClapクレートがメチャクチャ良かった話](https://zenn.dev/shinobuy/articles/53aed032fe5977)
+  + [Clap の Derive API で列挙型のコマンドラインオプションを実装する](https://zenn.dev/takanori_is/articles/rust-clap-derive-api-arg-enum)
++ Web
+  + [Rust の新しい HTTP サーバーのクレート Axum をフルに活用してサーバーサイドアプリケーション開発をしてみる](https://blog-dry.com/entry/2021/12/26/002649#Dependency-Injection)
++ テスト
+  + [[Rust] mockallで単体テスト](https://qiita.com/deepgreenAN/items/1b9887db759bbb96c9b6)
+  + [RustのテストのTIPS](https://qiita.com/aoyagikouhei/items/dadafc8d6295db76ef0e#asyncawait%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
+  + [RustによるResult型のエラーハンドリング入門](https://zenn.dev/hakoten/articles/8ae9dd0d3a2080)
 + [【Rust】モックライブラリMockitoで非同期のテストコードを書く](https://zenn.dev/collabostyle/articles/c44cc1d20ad4fb)
++ WorkSpace
+  + [Rust Crate Warning About Workspace Resolver - What is it, how to fix it?](https://forum.dfinity.org/t/rust-crate-warning-about-workspace-resolver-what-is-it-how-to-fix-it/23883)
+  + [[Rust] フィーチャーフラグの使い方](https://qiita.com/osanshouo/items/43271813b5d62e89d598)
++ ログ
+  + [Rust での tracing](https://blog.ojisan.io/rust-tracing/) 
+  + [Tracingを用いたRustのロギング理解の図とメモ](https://zenn.dev/scirexs/articles/c467a911218593)
++ その他
+  + [Rust の Future について](https://blog.tiqwab.com/2022/03/26/rust-future.html)
+  + [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 
 ## will
 
@@ -90,7 +98,7 @@ TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
   + traitを参照させようとしたら実態が見れないと怒られたので実装参照で実施
 + [x] テスト組み込み
 + [x] setting機能追加
-+ [ ] log -> tracing
++ [x] log -> tracing
 + [ ] ファイル管理とかのサンプル追加
 + [ ] 制御ファイル(yaml)の追加
 + [ ] 起動パラメタでのdry-runしたい
