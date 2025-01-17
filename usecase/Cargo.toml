@@ -12,6 +12,8 @@ repository = {path = "../repository"}
 repository_handler = {path = "../repository_handler"}
 mockall = {version = "0.13.1"}
 mockall_double = {version = "0.3.1"}
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 
 [dev-dependencies]
 tokio = {version = "1.41.1", features = ["full"]}

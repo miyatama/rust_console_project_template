@@ -16,6 +16,7 @@ impl<'r, R: TodoRepository> GetTodoListUseCaseImpl<'r, R> {
 }
 
 impl<'r, R: TodoRepository> GetTodoListUseCase for GetTodoListUseCaseImpl<'r, R> {
+    #[tracing::instrument(skip(self))]
     fn run(&self) -> AppResult<Vec<Todo>> {
         self.todo_repository.list()
     }

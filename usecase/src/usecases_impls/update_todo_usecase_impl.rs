@@ -16,6 +16,7 @@ impl<'r, R: TodoRepository> UpdateTodoUseCaseImpl<'r, R> {
 }
 
 impl<'r, R: TodoRepository> UpdateTodoUseCase for UpdateTodoUseCaseImpl<'r, R> {
+    #[tracing::instrument(skip(self))]
     fn run(&self, id: u32, text: String) -> AppResult<Todo> {
         self.todo_repository.update(Todo { id: id, text: text })
     }

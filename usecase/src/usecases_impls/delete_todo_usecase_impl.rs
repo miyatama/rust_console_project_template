@@ -15,6 +15,7 @@ impl<'r, R: TodoRepository> DeleteTodoUseCaseImpl<'r, R> {
 }
 
 impl<'r, R: TodoRepository> DeleteTodoUseCase for DeleteTodoUseCaseImpl<'r, R> {
+    #[tracing::instrument(skip(self))]
     fn run(&self, id: u32) -> AppResult<()> {
         self.todo_repository.delete(id)
     }

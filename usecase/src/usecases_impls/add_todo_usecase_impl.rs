@@ -17,6 +17,7 @@ impl<'r, R: TodoRepository> AddTodoUseCaseImpl<'r, R> {
 }
 
 impl<'r, R: TodoRepository> AddTodoUseCase for AddTodoUseCaseImpl<'r, R> {
+    #[tracing::instrument(skip(self))]
     fn run(&self, text: String) -> AppResult<Todo> {
         self.todo_repository.create(text)
     }

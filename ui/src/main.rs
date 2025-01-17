@@ -13,6 +13,8 @@ async fn main() {
                 .unwrap_or_else(|_| "debug".into()),
         )
         .with(tracing_subscriber::fmt::layer())
+        // TODO jsonでの出力も試したい
+        // .with(tracing_subscriber::fmt::layer().json())
         .init();
 
     log::set_logger(&LOGGER).unwrap();
