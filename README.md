@@ -213,3 +213,22 @@ pub trait DomainHandler {
 ```
 
 どうもautomockなtraitを保持するautomockなtraitを使ってるのがまずいっぽい。 -> domainをdomain + domain_handlerに分割
+
+###  no method named `json` found for struct `tracing_subscriber::fmt::Layer` in the current scope
+
+```rust
+error[E0599]: no method named `json` found for struct `tracing_subscriber::fmt::Layer` in the current scope
+  --> ui\src/main.rs:17:48
+   |
+17 |         .with(tracing_subscriber::fmt::layer().json())
+   |                                                ^^^^ method not found in `Layer<_>`
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `ui` (bin "ui") due to 1 previous error
+```
+
+tracingで下記を試そうとしたら発生
+
+```rust
+.with(tracing_subscriber::fmt::layer().json())
+```
