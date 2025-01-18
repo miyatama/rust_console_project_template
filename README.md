@@ -81,11 +81,17 @@ TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
   + [[Rust] フィーチャーフラグの使い方](https://qiita.com/osanshouo/items/43271813b5d62e89d598)
 + ログ
   + [Rust での tracing](https://blog.ojisan.io/rust-tracing/) 
+  + [tracing/tracing-subscriberでログが出力される仕組みを理解する](https://blog.ymgyt.io/entry/how-tracing-and-tracing-subscriber-write-events/)
   + [Tracingを用いたRustのロギング理解の図とメモ](https://zenn.dev/scirexs/articles/c467a911218593)
+  + [AWS Distro for Open Telemetryの超詳細解説](https://qiita.com/tech4anyone/items/1e34b0fcbed2712a3f79)
 + その他
   + [Rust の Future について](https://blog.tiqwab.com/2022/03/26/rust-future.html)
   + [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 
+6831:6831/udp 
+6832:6832/udp 
+16686:16686 
+14268:14268
 ## will
 
 + [x] DI構成をModules形式に変更
@@ -231,4 +237,10 @@ tracingで下記を試そうとしたら発生
 
 ```rust
 .with(tracing_subscriber::fmt::layer().json())
+```
+
+[tracing-subscriberの公式ドキュメント](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)にもある通り、jsonフラグを立てる必要がある。
+
+```toml
+tracing-subscriber = {version = "0.3.19", features = ["std", "env-filter", "registry", "fmt", "json"]}
 ```

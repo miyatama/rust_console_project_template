@@ -2,7 +2,6 @@ use crate::domains::settings::Settings;
 use crate::domains::todo_api_client::TodoApiClient;
 use crate::domains_impl::settings_impl::SettingsImpl;
 use futures::executor;
-use log::debug;
 use reqwest;
 use reqwest::header::CONTENT_TYPE;
 use serde::{Deserialize, Serialize};
@@ -54,7 +53,6 @@ impl TodoApiClient for TodoApiClientImpl {
             };
             let endpoint = self.settings.get_todo_endpoint().unwrap();
             let url = format!("{}/todos", endpoint);
-            debug!("get todos url: {}", &url);
             let param_string = serde_json::to_string(&param).unwrap();
             let client = reqwest::Client::new();
             let res = client
@@ -78,7 +76,6 @@ impl TodoApiClient for TodoApiClientImpl {
                 _ => {}
             }
             let content = content.unwrap();
-            debug!("get todo response: {}", &content);
             let response: GetTodoResponse = serde_json::from_str(&content).unwrap();
             Ok(response.todos)
         };
@@ -113,7 +110,6 @@ impl TodoApiClient for TodoApiClientImpl {
                 _ => {}
             }
             let content = content.unwrap();
-            debug!("create todo response: {}", &content);
             let response: Todo = serde_json::from_str(&content).unwrap();
             Ok(response)
         };
@@ -151,7 +147,6 @@ impl TodoApiClient for TodoApiClientImpl {
                 _ => {}
             }
             let content = content.unwrap();
-            debug!("update todo response: {}", &content);
             let response: Todo = serde_json::from_str(&content).unwrap();
             Ok(response)
         };

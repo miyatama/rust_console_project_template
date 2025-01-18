@@ -1,11 +1,11 @@
 use clap::{Parser, Subcommand};
 use domain_handler::DomainHandlerImpl;
-use log::info;
 use repository_handler::RepositoryHandlerImpl;
 use std::cmp::min;
 use usecase::{AddTodoUseCase, DeleteTodoUseCase, GetTodoListUseCase, UpdateTodoUseCase};
 use usecase_handler::{UsecaseHandler, UsecaseHandlerImpl};
 use util::AppResult;
+use tracing::{event, Level};
 
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
@@ -37,9 +37,8 @@ enum SubCommands {
     },
 }
 
+#[tracing::instrument]
 pub async fn run(config: &Config) -> AppResult<()> {
-    info!("config: {:?}", config);
-
     let domain_hanler = DomainHandlerImpl::new();
     match domain_hanler {
         Err(e) => {
@@ -59,7 +58,7 @@ pub async fn run(config: &Config) -> AppResult<()> {
                     let max_index = min(number, todos.len());
                     for i in 0..max_index {
                         let todo = &todos[i];
-                        info!("{} - {}", todo.id, todo.text);
+                        event!(Level::INFO, id = &todo.id, text = &todo.text);
                     }
                     return Ok(());
                 }
@@ -72,7 +71,7 @@ pub async fn run(config: &Config) -> AppResult<()> {
             let usecase = usecases.add_todo();
             match usecase.run(text.clone()) {
                 Ok(todo) => {
-                    info!("add succeed: {} - {}", &todo.id, &todo.text);
+                    event!(Level::INFO, id = &todo.id, text = &todo.text);
                     return Ok(());
                 }
                 Err(e) => {
@@ -84,7 +83,7 @@ pub async fn run(config: &Config) -> AppResult<()> {
             let usecase = usecases.update_todo();
             match usecase.run(*id, text.clone()) {
                 Ok(todo) => {
-                    info!("update succeed: {} - {}", &todo.id, &todo.text);
+                    event!(Level::INFO, id = &todo.id, text = &todo.text);
                     return Ok(());
                 }
                 Err(e) => {
