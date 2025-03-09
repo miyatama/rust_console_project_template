@@ -64,6 +64,22 @@ classDiagram
 
 TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
 
+## build
+
+local
+
+```shell
+cargo build --release
+```
+
+docker
+
+```shell
+version="1.0.0"
+docker build -t rust_console:${version} .
+docker tag rust_console:${version} rust_console:latest
+```
+
 ## reference
 
 + 引数
@@ -84,6 +100,9 @@ TODOのAPI提供サーバーの情報とか持たせる。yamlにしとく。
   + [tracing/tracing-subscriberでログが出力される仕組みを理解する](https://blog.ymgyt.io/entry/how-tracing-and-tracing-subscriber-write-events/)
   + [Tracingを用いたRustのロギング理解の図とメモ](https://zenn.dev/scirexs/articles/c467a911218593)
   + [AWS Distro for Open Telemetryの超詳細解説](https://qiita.com/tech4anyone/items/1e34b0fcbed2712a3f79)
++ Docker
+  + [[1.59.0対応] Rustを軽量イメージ化するためのDockerfile](https://zenn.dev/kyoheiu/articles/dcefe0c75f0e17)
+  + [Docker hub - Rust](https://hub.docker.com/_/rust)
 + その他
   + [Rust の Future について](https://blog.tiqwab.com/2022/03/26/rust-future.html)
   + [Rustのマクロ展開後のコードを確認する](https://scrapbox.io/emanon001/Rust%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E5%B1%95%E9%96%8B%E5%BE%8C%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
